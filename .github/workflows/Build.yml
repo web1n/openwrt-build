@@ -23,7 +23,7 @@ jobs:
       - name: Set up build environment
         run: sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
       - name: Clone code
-        run: git clone -b master --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt.git
+        run: git clone -b main --single-branch --filter=blob:none https://github.com/VIKINGYFY/immortalwrt
       - name: Update feeds
         run: |
           cat ../feeds.conf.more >> feeds.conf.default
