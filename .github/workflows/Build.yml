@@ -13,7 +13,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ipq60xx, ipq807x]
+        include:
+          - target: ipq60xx
+            arch: arm64
+          - target: ipq807x
+            arch: arm64
+          - target: mt7621
+            arch: mips
 
     steps:
       - name: Checkout
@@ -35,8 +41,9 @@ jobs:
         working-directory: ./immortalwrt
       - name: Make configuration
         run: |
-          cat ../common.config > .config
-          cat ../${{ matrix.target }}.config >> .config
+          cat ../configs/common.config > .config
+          cat ../configs/common-${{ matrix.arch }}.config >> .config
+          cat ../configs/${{ matrix.target }}.config >> .config
           make defconfig
           cat .config
         working-directory: ./immortalwrt
