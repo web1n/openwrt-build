@@ -16,10 +16,16 @@ jobs:
         include:
           - target: ipq60xx
             arch: arm64
+            source: https://github.com/VIKINGYFY/immortalwrt
+            branch: main
           - target: ipq807x
             arch: arm64
+            source: https://github.com/VIKINGYFY/immortalwrt
+            branch: main
           - target: mt7621
             arch: mips
+            source: https://github.com/immortalwrt/immortalwrt
+            branch: master
 
     steps:
       - name: Checkout
@@ -29,7 +35,7 @@ jobs:
       - name: Set up build environment
         run: sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
       - name: Clone code
-        run: git clone -b main --single-branch --filter=blob:none https://github.com/VIKINGYFY/immortalwrt
+        run: git clone -b ${{ matrix.branch }} --single-branch --filter=blob:none ${{ matrix.source }}
       - name: Update feeds
         run: |
           cat ../feeds.conf.more >> feeds.conf.default
