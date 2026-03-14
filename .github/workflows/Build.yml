@@ -35,16 +35,16 @@ jobs:
       - name: Set up build environment
         run: sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
       - name: Clone code
-        run: git clone -b ${{ matrix.branch }} --single-branch --filter=blob:none ${{ matrix.source }}
+        run: git clone -b ${{ matrix.branch }} --single-branch --filter=blob:none ${{ matrix.source }} openwrt
       - name: Update feeds
         run: |
           cat ../feeds.conf.more >> feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-        working-directory: ./immortalwrt
+        working-directory: ./openwrt
       - name: Patch source code
         run: bash ../patch.sh
-        working-directory: ./immortalwrt
+        working-directory: ./openwrt
       - name: Make configuration
         run: |
           cat ../configs/common.config > .config
@@ -52,20 +52,20 @@ jobs:
           cat ../configs/${{ matrix.target }}.config >> .config
           make defconfig
           cat .config
-        working-directory: ./immortalwrt
+        working-directory: ./openwrt
       - name: Download sources
         run: make download -j$(nproc) V=s
-        working-directory: ./immortalwrt
+        working-directory: ./openwrt
       - name: Build firmware
         run: make -j$(nproc) V=w
-        working-directory: ./immortalwrt
+        working-directory: ./openwrt
       - name: Prepare artifacts
         run: |
-          ls -la immortalwrt/bin/targets/*/*
+          ls -la openwrt/bin/targets/*/*
           mkdir -p ./out/
-          cp immortalwrt/bin/targets/*/*/*.{bin,img,itb,ubi} ./out/ 2>/dev/null || true
-          cp immortalwrt/bin/targets/*/*/config.buildinfo ./out/${{ matrix.target }}.config.buildinfo
-          cp immortalwrt/bin/targets/*/*/*.manifest ./out/
+          cp openwrt/bin/targets/*/*/*.{bin,img,itb,ubi} ./out/ 2>/dev/null || true
+          cp openwrt/bin/targets/*/*/config.buildinfo ./out/${{ matrix.target }}.config.buildinfo
+          cp openwrt/bin/targets/*/*/*.manifest ./out/
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
@@ -89,7 +89,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          name: "ImmortalWrt Build - ${{ steps.vars.outputs.CURRENT_DATE }}"
+          name: "Build - ${{ steps.vars.outputs.CURRENT_DATE }}"
           tag_name: ${{ steps.vars.outputs.TAG }}
           files: |
             ./release-files/*
