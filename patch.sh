@@ -2,8 +2,8 @@
 
 git config --global user.name "github-actions[bot]"
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
-git remote add imm https://github.com/immortalwrt/immortalwrt.git
-git fetch imm
+# git remote add imm https://github.com/immortalwrt/immortalwrt.git
+# git fetch imm
 
 # git cherry-pick fff84505e3fa12273ef08bfba1b0327991214acb
 
