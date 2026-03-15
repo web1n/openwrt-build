@@ -71,6 +71,7 @@ jobs:
           cp openwrt/bin/targets/*/*/*.{bin,img,itb,ubi} ./out/ 2>/dev/null || true
           cp openwrt/bin/targets/*/*/config.buildinfo ./out/${{ matrix.target }}.config.buildinfo
           cp openwrt/bin/targets/*/*/*.manifest ./out/
+          cp openwrt/.config ./out/${{ matrix.target }}.config
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
