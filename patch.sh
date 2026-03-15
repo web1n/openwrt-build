@@ -1,5 +1,9 @@
 #!/bin/bash
 
+git clone --depth 1 --branch master https://github.com/muink/openwrt-natmapt.git package/natmapt
+git clone --depth 1 --branch master https://github.com/muink/openwrt-stuntman.git package/stuntman
+git clone --depth 1 --branch master https://github.com/muink/luci-app-natmapt.git package/luci-app-natmapt
+
 git config --global user.name "github-actions[bot]"
 git config --global user.email "github-actions[bot]@users.noreply.github.com"
 # git remote add imm https://github.com/immortalwrt/immortalwrt.git
