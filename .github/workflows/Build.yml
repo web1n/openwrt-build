@@ -14,6 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - target: an7581
+            arch: arm64
+            source: https://github.com/web1n/immortalwrt
+            branch: xg-040g-md
           - target: ipq60xx
             arch: arm64
             source: https://github.com/VIKINGYFY/immortalwrt
