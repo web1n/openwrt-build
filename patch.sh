@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # bandix
 git clone --depth 1 --branch main https://github.com/timsaya/openwrt-bandix.git package/bandix
 git clone --depth 1 --branch main https://github.com/timsaya/luci-app-bandix.git package/luci-app-bandix
