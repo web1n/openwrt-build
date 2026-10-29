@@ -17,6 +17,9 @@ cp -r /tmp/coolsnowwolf-luci/applications/luci-app-uugamebooster package/luci-ap
 cp -r /tmp/coolsnowwolf-packages/net/uugamebooster package/uugamebooster
 rm -rf /tmp/coolsnowwolf-luci /tmp/coolsnowwolf-packages
 
+git clone --depth 1 --branch main https://github.com/web1n/luci-app-leigod-manager.git package/luci-app-leigod-manager
+sed -i "s/option mode 'tun'/option mode 'tproxy'/" package/luci-app-leigod-manager/root/etc/config/leigod-manager
+
 # fix LuCI packages copied from feeds/luci/applications
 for makefile in package/luci-app-*/Makefile; do
     [ -f "$makefile" ] || continue
