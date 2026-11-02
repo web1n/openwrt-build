@@ -1,3 +1,4 @@
 src-git cups_mdns https://github.com/web1n/cups-mdns.git
+src-git leigod_acc https://github.com/web1n/luci-app-leigod-acc.git
 src-git rtp2httpd https://github.com/stackia/rtp2httpd.git
 src-git xwrt https://github.com/x-wrt/com.x-wrt.git
