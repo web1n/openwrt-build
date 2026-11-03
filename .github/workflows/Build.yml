@@ -40,6 +40,10 @@ jobs:
             arch: mips
             source: https://github.com/immortalwrt/immortalwrt
             branch: master
+          - target: mt7621-uu
+            arch: mips
+            source: https://github.com/immortalwrt/immortalwrt
+            branch: master
     uses: ./.github/workflows/reusable-build.yml
     with:
       target: ${{ matrix.target }}
