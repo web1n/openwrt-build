@@ -88,6 +88,10 @@ jobs:
           cp openwrt/bin/targets/*/*/config.buildinfo ./out/${{ inputs.target }}.config.buildinfo
           cp openwrt/bin/targets/*/*/*.manifest ./out/
           cp openwrt/.config ./out/${{ inputs.target }}.config
+          for file in ./out/*.{bin,img,itb,ubi,manifest}; do
+            [ -f "$file" ] || continue
+            mv "$file" "${file%.*}-${{ inputs.target }}.${file##*.}"
+          done
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v6
